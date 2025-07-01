@@ -1,4 +1,3 @@
-# My solution to p03_list_of_depths.py
 from random import randint, seed
 from collections import deque
 
@@ -29,9 +28,12 @@ class Node:
         self.val = val
 
     def __str__(self) -> str:
+        left = self.left.val if self.left else "None"
+        right = self.right.val if self.right else "None"
+
         if not self:
             return "None"
-        return f"Node: {self.val}"
+        return f"Node: {self.val}, (l: {left}, r: {right})"
 
 
 def print_bfs(root):
@@ -60,7 +62,7 @@ def create_tree(n):
             q.append(left_node)
             count += 1
 
-        if count <= n:
+        if count < n:
             right_node = Node(randint(0, 100), None, None)
             node.right = right_node
             q.append(right_node)
@@ -69,28 +71,47 @@ def create_tree(n):
     return root
 
 
-def get_linked_lists(root):
-    lls = []
+def create_unbalanced_tree(n):
+    root = Node(randint(0, 100), None, None)
     q = deque([root])
+    count = 1
     while q:
-        head = tail = None
-        for _ in range(len(q)):
-            node = q.popleft()
-            if not head:
-                head = tail = LLNode(node, None)
-            else:
-                tail.next = LLNode(node, None)
-                tail = tail.next
-            if node.left:
-                q.append(node.left) 
-            if node.right:
-                q.append(node.right)
-        lls.append(head)
-    return lls
+        node = q.popleft()
+        if count < n:
+            left_node = Node(randint(0, 100), None, None)
+            node.left = left_node
+            q.append(left_node)
+            count += 1
+
+        if count < n:
+            right_node = Node(randint(0, 100), None, None)
+            node.right = right_node
+            q.append(right_node)
+            count += 1
+
+    current = root
+    while current.left:
+        current = current.left
+    current.left = Node(randint(0, 100), None, None)
+
+    return root
 
 
-root = create_tree(10)
-print_bfs(root)
-lls = get_linked_lists(root)
-for head in lls:
-    print(head)
+def bst_dfs(array, left, right):
+    if left > right:
+        return None
+    if left == right:
+        return Node(array[left], None, None)
+    mid = (left + right) // 2
+    node = Node(array[mid], None, None)
+    left_tree = bst_dfs(array, left, mid - 1)
+    right_tree = bst_dfs(array, mid + 1, right)
+    node.left = left_tree
+    node.right = right_tree
+    return node
+
+
+def create_bst(n):
+    array = sorted([randint(0, 100) for _ in range(n)])
+    print(array)
+    return bst_dfs(array, 0, len(array) - 1)
