@@ -61,14 +61,30 @@ def is_route_bidirectional(graph, start, end):
         if node in visited_start and node in visited_end:
             return True
 
-        for y in graph[node]:
-            if node in visited_start and y not in visited_start:
-                visited_start.add(y)
-                to_visit.append(y)
-            if node in visited_end and y not in visited_end:
-                visited_end.add(y)
-                to_visit.append(y)
+        for child in graph[node]:
+            if node in visited_start and child not in visited_start:
+                visited_start.add(child)
+                to_visit.append(child)
+            if node in visited_end and child not in visited_end:
+                visited_end.add(child)
+                to_visit.append(child)
     return False
+
+def dfs(node, target, visited, graph):
+    visited.add(node)
+    if node == target:
+        return True
+    for child in graph[node]:
+        if child not in visited:
+            result = dfs(child, target, visited, graph)
+            if result:
+                return True
+    return False
+
+
+def is_path(graph, start, target):
+    visited = set()
+    return dfs(start, target, visited, graph)
 
 
 class Test(unittest.TestCase):
@@ -118,6 +134,12 @@ class Test(unittest.TestCase):
         for [start, end, expected] in self.tests:
             actual = is_route_bidirectional(self.graph, start, end)
             assert actual == expected
+            
+    def test_mine(self):
+        for [start, end, expected] in self.tests:
+            actual = is_path(self.graph, start, end)
+            assert actual == expected
+
 
 
 if __name__ == "__main__":

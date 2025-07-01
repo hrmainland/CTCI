@@ -34,4 +34,5 @@ def array_to_binary_tree(array, start, end):
 
 if __name__ == "__main__":
     test_array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 18, 22, 43, 144, 515, 4123]
+    test_array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     print(array_to_binary_tree(test_array, 0, len(test_array) - 1))
