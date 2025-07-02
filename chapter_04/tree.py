@@ -36,6 +36,24 @@ class Node:
         return f"Node: {self.val}, (l: {left}, r: {right})"
 
 
+def print_tree(node, prefix="", is_left=True):
+    if node is None:
+        return
+
+    if node.right:
+        new_prefix = prefix + ("│   " if is_left else "    ")
+        print_tree(node.right, new_prefix, False)
+
+    connector = "└── " if is_left else "┌── "
+    print(prefix + connector + str(node.val))
+
+    if node.left:
+        new_prefix = prefix + ("    " if is_left else "│   ")
+        print_tree(node.left, new_prefix, True)
+
+
+
+
 def print_bfs(root):
     q = deque([root])
     indent = 0
