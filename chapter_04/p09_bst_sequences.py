@@ -1,4 +1,4 @@
-from chapter_04.binary_search_tree import BinarySearchTree
+from binary_search_tree import BinarySearchTree
 
 
 def find_bst_sequences(bst):
@@ -88,10 +88,11 @@ def example():
     # bst.insert(14);
 
     sequences = find_bst_sequences(bst)
-    print(sequences)
+    # print(sequences)
 
     sequences = find_bst_sequences_backtracking(bst)
-    print(sequences)
+    for elem in sequences:
+        print(elem)
 
 
 if __name__ == "__main__":

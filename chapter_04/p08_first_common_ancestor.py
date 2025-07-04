@@ -1,4 +1,4 @@
-from chapter_04.binary_tree import BinaryTree
+from binary_tree import BinaryTree
 
 
 def first_common_ancestor(p, q):

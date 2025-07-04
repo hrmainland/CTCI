@@ -4,6 +4,9 @@ class Node:
         self.parent = None
         self.left = None
         self.right = None
+        
+    def __str__(self) -> str:
+        return f"Node {self.key}"
 
 
 class BinaryTree:
@@ -29,6 +32,23 @@ class BinaryTree:
         else:
             raise Exception("a node cannot have more than two children")
         return new
+
+    def print_ascii_tree(self):
+        def _print(node, prefix="", is_left=True):
+            if node is None:
+                return
+
+            if node.right:
+                new_prefix = prefix + ("│   " if is_left else "    ")
+                _print(node.right, new_prefix, False)
+
+            print(prefix + ("└── " if is_left else "┌── ") + str(node.key))
+
+            if node.left:
+                new_prefix = prefix + ("    " if is_left else "│   ")
+                _print(node.left, new_prefix, True)
+
+        _print(self.root)
 
 
 def example():
