@@ -131,5 +131,4 @@ def bst_dfs(array, left, right):
 
 def create_bst(n):
     array = sorted([randint(0, 100) for _ in range(n)])
-    print(array)
     return bst_dfs(array, 0, len(array) - 1)

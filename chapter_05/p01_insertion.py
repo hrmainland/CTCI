@@ -41,3 +41,18 @@ def test_bits_insertion():
 
 if __name__ == "__main__":
     test_bits_insertion()
+
+
+'''
+00011001
+
+
+11100110
+11100111
+
+00011000
+
+
+
+'''
+

@@ -34,6 +34,22 @@ def flip_bit_to_win_alt(num):
     return longest
 
 
+def sliding(num):
+    binary = bin(num)[2:]
+    left = right = 0
+    count = int(binary[0] == "0")
+    while right < len(binary):
+        if count > 1:
+            if binary[left] == "0":
+                count -= 1
+            left += 1
+
+        right += 1
+        if right < len(binary) and binary[right] == "0":
+            count += 1
+    return right - left
+
+
 test_cases = [
     (0b0, 1),
     (0b111, 4),
@@ -51,4 +67,7 @@ def test_flip_bit_to_win():
 
 
 if __name__ == "__main__":
+    num = 225
+    print(bin(num)[2:])
+    print(sliding(num))
     test_flip_bit_to_win()
