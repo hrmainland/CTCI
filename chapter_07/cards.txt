@@ -1,0 +1,19 @@
+Core Objects:
+- Deck?
+- Card
+- Suit
+- Rank
+
+Relationships:
+deck: card = 1 to many
+suit: card = 1 to many
+rank: card = 1 to many
+
+Needed for Blackjack:
+- Card Score
+- Ace can be either
+
+blackjack deck inherits from deck
+with additional features
+- card_scores = [1, 11]
+

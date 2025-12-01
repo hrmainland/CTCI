@@ -1,0 +1,10 @@
+# from collections import deque
+
+import heapq
+
+
+# q = heapq.heapify([])
+q = []
+heapq.heappush(q, 1)
+
+q
