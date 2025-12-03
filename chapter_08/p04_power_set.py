@@ -60,7 +60,28 @@ def get_subsets_c(_set):
     return subsets
 
 
-testable_functions = [get_subsets_a, get_subsets_b, get_subsets_c]
+def power_set(nums):
+    result = []
+    nums = list(nums)
+
+    def rec_search(index, subset: set):
+        # base case
+        if index == len(nums):
+            result.append(subset.copy())
+            return
+
+        # main body
+        subset.add(nums[index])
+        rec_search(index + 1, subset)
+        subset.remove(nums[index])
+        rec_search(index + 1, subset)
+        return
+
+    rec_search(0, set())
+    return result
+
+
+testable_functions = [get_subsets_a, get_subsets_b, get_subsets_c, power_set]
 
 test_cases = [({1, 2, 3}, {(), (1,), (1, 2), (1, 2, 3), (1, 3), (2,), (2, 3), (3,)})]
 
