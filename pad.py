@@ -1,10 +1,8 @@
-import heapq
+from typing import List
 
-vars = [[0, 6, 5], [1, 3, 3], [0, 2, 2]]
+def add(array: List):
+    return sum(array)
 
-heapq.heapify(vars)
-print(vars)
+num = "123"
 
-heapq.heapreplace(vars, [7, 7, 7])
-
-print(vars)
+add(num)

@@ -26,13 +26,12 @@ def multiply(a, b):
         return b + b
 
     # main body
+    partial = multiply(a // 2, b)
     if a % 2 == 0:
-        return multiply(a // 2, b) + multiply(a // 2, b)
+        return partial + partial
     else:
-        return multiply(a // 2, b) + multiply(a // 2, b) + b
+        return partial + partial + b
 
 
 result = multiply(214, 123)
 print(result)
-
-
