@@ -53,5 +53,19 @@ def test_two_stackable_boxes():
     assert tallest_stack([Box(3, 2, 1), Box(6, 5, 4)]) == 9
 
 
+class TestTallestStack(unittest.TestCase):
+    def test_null(self):
+        self.assertEqual(tallest_stack([]), 0)
+
+    def test_single_box(self):
+        self.assertEqual(tallest_stack([Box(3, 2, 1)]), 3)
+
+    def test_two_conflicting_boxes(self):
+        self.assertEqual(tallest_stack([Box(3, 2, 1), Box(5, 4, 1)]), 5)
+
+    def test_two_stackable_boxes(self):
+        self.assertEqual(tallest_stack([Box(3, 2, 1), Box(6, 5, 4)]), 9)
+
+
 if __name__ == "__main__":
     unittest.main()

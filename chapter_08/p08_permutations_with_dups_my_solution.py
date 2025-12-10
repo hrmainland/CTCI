@@ -1,65 +1,32 @@
-# My solution to p07_permutations_without_dups.py
+"""
+"aabc"
+
+{a:2, b:1, c:1}
 
 """
 
-
-options = [a, b, c]
-
-a
-
-ab
-ba
-
-result
-
-rec(used_idx):
-    #base base
-    if len(used_idx)
-    for every non-used index:
-        used_idx += index
-        rec(used_idx, word + new char)
-        used_idx.pop()
-
-result = []
-used_idx = {}
-word = ""
-
-"ab"
-
-
-"""
+from collections import Counter
 
 
 def perms(string):
+    freq = Counter(string)
     result = []
 
-    def recurse(used_idx, word):
-        # base case
-        if len(used_idx) == len(string):
-            result.append(word)
-            return
-        # main body
-        for i in range(len(string)):
-            if i not in used_idx:
-                used_idx.add(i)
-                recurse(used_idx, word + string[i])
-                used_idx.remove(i)
+    def recurse(index, prefix):
+        if index == len(string):
+            result.append(prefix)
+        for char, count in freq.items():
+            if count == 0:
+                continue
+            freq[char] -= 1
+            recurse(index + 1, prefix + char)
+            # backtrack
+            freq[char] += 1
 
-    recurse(set(), "")
+    recurse(0, "")
     return result
 
 
-def perms_2(string):
-    if len(string) == 0:
-        return [""]
-    first_char = string[0]
-    post_perms = perms_2(string[1:])
-    for perm in post_perms:
-        for i in range(len(perm) + 1):
-            new = perm[:i] + first_char + perm[i:]
-            post_perms.append(new)
-    return post_perms
-
-
-string = "abcd"
-print(perms_2(string))
+string = "aabc"
+result = perms(string)
+print(result)
